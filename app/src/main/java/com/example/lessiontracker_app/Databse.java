@@ -17,6 +17,8 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    String drop = "drop table if exists " + TABLE_NAME;
+    sqLiteDatabase.execSQL(drop);
+    onCreate(sqLiteDatabase);
     }
 }
