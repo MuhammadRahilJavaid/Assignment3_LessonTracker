@@ -9,9 +9,23 @@
     tools:layout_editor_absoluteY="-4dp">
 
     <EditText
+        android:id="@+id/sabkii"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:inputType="number"
+        android:text="Sabki: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/manzill"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/sabakk"
+        app:layout_constraintTop_toBottomOf="@+id/recylerViewStudent"
+        app:layout_constraintVertical_bias="0.196" />
+
+    <EditText
         android:id="@+id/sabakk"
         android:layout_width="80dp"
         android:layout_height="48dp"
+        android:layout_marginStart="5dp"
         android:inputType="number"
         android:text="Sabak: "
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,20 +33,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recylerViewStudent"
-        app:layout_constraintVertical_bias="0.258" />
-
-    <EditText
-        android:id="@+id/sabkii"
-        android:layout_width="80dp"
-        android:layout_height="48dp"
-        android:inputType="number"
-        android:text="Sabki: "
-        app:layout_constraintBottom_toTopOf="@+id/addLesson"
-        app:layout_constraintEnd_toStartOf="@+id/manzill"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/sabakk"
-        app:layout_constraintTop_toBottomOf="@+id/datee"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintVertical_bias="0.196" />
 
     <EditText
         android:id="@+id/manzill"
@@ -45,12 +46,12 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sabkii"
         app:layout_constraintTop_toBottomOf="@+id/recylerViewStudent"
-        app:layout_constraintVertical_bias="0.258" />
+        app:layout_constraintVertical_bias="0.196" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerViewStudent"
         android:layout_width="365dp"
-        android:layout_height="337dp"
+        android:layout_height="259dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -66,20 +67,25 @@
         android:id="@+id/addLesson"
         android:layout_width="105dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="160dp"
+        android:layout_marginBottom="176dp"
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sabkii"
+        app:layout_constraintVertical_bias="0.771" />
 
     <TextView
         android:id="@+id/datee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="184dp"
         android:layout_marginTop="24dp"
         android:text="Date: "
+        app:layout_constraintBottom_toTopOf="@+id/sabkii"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recylerViewStudent" />
+        app:layout_constraintTop_toBottomOf="@+id/recylerViewStudent"
+        app:layout_constraintVertical_bias="0.437" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
