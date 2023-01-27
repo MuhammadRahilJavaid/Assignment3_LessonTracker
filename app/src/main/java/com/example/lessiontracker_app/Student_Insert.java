@@ -44,7 +44,7 @@ public class Student_Insert extends AppCompatActivity {
                 Intent intent = new Intent(Student_Insert.this, MainActivity.class);
                 Student message = (Student) adapterView.getItemAtPosition(i);
                 intent.putExtra("Name", message.getName());
-                intent.putExtra("Id", message.getId());
+                intent.putExtra("Id", Integer.toString(message.getId()));
                 startActivity(intent);
             }
         });

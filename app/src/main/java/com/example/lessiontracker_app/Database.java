@@ -64,6 +64,46 @@ public class Database extends SQLiteOpenHelper {
 
         return students;
     }
+
+
+
+
+    public List<Student> GetLessons(int i){
+
+        List<Student> students = new ArrayList<>();
+
+        String sql = "SELECT * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                students.add(new Student(cursor.getInt(0),cursor.getString(1)));
+            } while (cursor.moveToNext());
+        }
+
+//        if (cursor.moveToFirst()) {
+//            do {
+//                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+//                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+//                students.add(new Student(id,name));
+//            } while (cursor.moveToNext());
+//        }
+
+        cursor.close();
+        db.close();
+
+        return students;
+    }
+
+
+
+
+
+
+
     public void insertStudent(Student student) {
         SQLiteDatabase db = this.getWritableDatabase();
 
