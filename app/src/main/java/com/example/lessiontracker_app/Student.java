@@ -3,21 +3,19 @@ package com.example.lessiontracker_app;
 public class Student {
     private int id;
     private String name;
-    private String city;
 
-    public Student(int id, String name, String city) {
+    public Student(int id, String name) {
         this.id = id;
         this.name = name;
-        this.city = city;
+    }
+    public Student(String name) {
+        this.id = id;
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Friend{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", city='" + city + '\'' +
-                '}';
+        return getId()+". "+getName().toUpperCase()+" ";
     }
 
     public int getId() {
@@ -36,11 +34,4 @@ public class Student {
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
 }
