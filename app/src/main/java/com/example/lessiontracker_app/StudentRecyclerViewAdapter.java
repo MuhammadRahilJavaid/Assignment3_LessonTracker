@@ -29,9 +29,9 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
     @Override
     public void onBindViewHolder(@NonNull StudentRecyclerViewAdapter.MyVH holder, int position) {
         holder.data = lessonsList.get(position);
-        holder.manzil.setText(holder.data.getManzil());
-        holder.sabak.setText(holder.data.getSabak());
-        holder.sabki.setText(holder.data.getSabki());
+        holder.manzil.setText(String.valueOf(holder.data.getManzil()));
+        holder.sabak.setText(String.valueOf(holder.data.getSabak()));
+        holder.sabki.setText(String.valueOf(holder.data.getSabki()));
         holder.date.setText(holder.data.getDate());
     }
 

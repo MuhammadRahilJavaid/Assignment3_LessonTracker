@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String MANZIL = "manzil";
     private static final String S_ID = "s_id";
 
-    public Database (Context context){super(context,DB_NAME,null,1);}
+    public Database (Context context){super(context,DB_NAME,null,2);}
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
     String create = "create table if not exists " + TABLE_NAME + "(id integer primary key autoincrement," +
@@ -35,7 +36,9 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     String drop = "drop table if exists " + TABLE_NAME;
+    String drop1 = "drop table if exists " + TABLE_NAME2;
     sqLiteDatabase.execSQL(drop);
+    sqLiteDatabase.execSQL(drop1);
     onCreate(sqLiteDatabase);
     }
 
@@ -64,7 +67,7 @@ public class Database extends SQLiteOpenHelper {
 //        }
 
         cursor.close();
-        db.close();
+//        db.close();
 
         return students;
     }
@@ -76,7 +79,7 @@ public class Database extends SQLiteOpenHelper {
 
         List<Lesson> lessons = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME2 +" where id = "+i+";";
+        String sql = "SELECT * FROM " + TABLE_NAME2 +" where s_id = "+i+";";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
@@ -97,24 +100,54 @@ public class Database extends SQLiteOpenHelper {
 //        }
 
         cursor.close();
-        db.close();
+//        db.close();
 
         return lessons;
     }
 
+    public boolean LessonExist(int i,String d){
+
+        String sql = "SELECT * FROM " + TABLE_NAME2 +" where s_id = "+i+" AND date = "+"'"+d+"';";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+
+        boolean flag = false;
+        if (cursor.moveToFirst()) {
+            do {
+                flag = true;
+            } while (cursor.moveToNext());
+        }
+
+//        if (cursor.moveToFirst()) {
+//            do {
+//                int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+//                String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+//                students.add(new Student(id,name));
+//            } while (cursor.moveToNext());
+//        }
+
+        cursor.close();
+//        db.close();
+
+        return flag;
+    }
+
     public void insertLesson(Lesson lesson) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(SABAK, lesson.getSabak());
         values.put(SABKI, lesson.getSabki());
         values.put(MANZIL, lesson.getManzil());
         values.put(S_ID, lesson.getSid());
         values.put("date", lesson.getDate());
-
-
-        db.insert(TABLE_NAME2, null, values);
-        db.close();
+        if(LessonExist(lesson.getSid(), lesson.getDate()) == true){
+            db.update(TABLE_NAME2, values, "s_id  = "+ lesson.getSid() +" AND date = '" +lesson.getDate()+"'"  , null);
+        }
+        else {
+            db.insert(TABLE_NAME2, null, values);
+        }
+//        db.close();
     }
 
 
@@ -129,7 +162,7 @@ public class Database extends SQLiteOpenHelper {
 
 
         db.insert(TABLE_NAME, null, values);
-        db.close();
+//        db.close();
     }
 
 

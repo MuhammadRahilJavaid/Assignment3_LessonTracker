@@ -2,8 +2,11 @@ package com.example.lessiontracker_app;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Lesson {
         private int sabak;
@@ -18,9 +21,9 @@ public class Lesson {
             this.sabki = sabki;
             this.manzil = manzil;
             if(date.contentEquals("")) {
-                Date today = Calendar.getInstance().getTime();
-                this.dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-                this.date = this.dateFormat.format(today);
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                String ddate = df.format(new Date());
+                this.date = ddate;
             }
             else{this.date = date;}
 
