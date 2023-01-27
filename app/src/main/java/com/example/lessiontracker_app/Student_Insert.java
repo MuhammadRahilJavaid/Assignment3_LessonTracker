@@ -2,8 +2,10 @@ package com.example.lessiontracker_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,7 +38,18 @@ public class Student_Insert extends AppCompatActivity {
                 }
             }
         });
+        lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(Student_Insert.this, MainActivity.class);
+                Student message = (Student) adapterView.getItemAtPosition(i);
+                intent.putExtra("Name", message.getName());
+                intent.putExtra("Id", message.getId());
+                startActivity(intent);
+            }
+        });
     }
+
     public void RefreshGrid(){
         List<Student> students = db.GetStudents();
 
