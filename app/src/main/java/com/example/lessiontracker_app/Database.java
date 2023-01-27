@@ -15,6 +15,10 @@ public class Database extends SQLiteOpenHelper {
     private static final String TABLE_NAME2 = "Lessons";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
+    private static final String SABKI = "sabki";
+    private static final String SABAK = "sabak";
+    private static final String MANZIL = "manzil";
+    private static final String S_ID = "s_id";
 
     public Database (Context context){super(context,DB_NAME,null,1);}
     @Override
@@ -22,7 +26,7 @@ public class Database extends SQLiteOpenHelper {
     String create = "create table if not exists " + TABLE_NAME + "(id integer primary key autoincrement," +
             " name text)";
     String createLesson = "create table if not exists " + TABLE_NAME2 + "(id integer primary key autoincrement," +
-            "created_at DATETIME DEFAULT CURRENT_DATE,sabki integer, sabak integer, manzil integer,s_id integer," +
+            "date text,sabki integer, sabak integer, manzil integer,s_id integer," +
             "FOREIGN KEY (s_id) REFERENCES "+TABLE_NAME+ "(id));";
     sqLiteDatabase.execSQL(create);
     sqLiteDatabase.execSQL(createLesson);
@@ -68,11 +72,11 @@ public class Database extends SQLiteOpenHelper {
 
 
 
-    public List<Student> GetLessons(int i){
+    public List<Lesson> GetLessons(int i){
 
-        List<Student> students = new ArrayList<>();
+        List<Lesson> lessons = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME;
+        String sql = "SELECT * FROM " + TABLE_NAME2 +" where id = "+i+";";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
@@ -80,7 +84,7 @@ public class Database extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                students.add(new Student(cursor.getInt(0),cursor.getString(1)));
+                lessons.add(new Lesson(cursor.getString(1),cursor.getInt(2),cursor.getInt(3),cursor.getInt(4),cursor.getInt(5)));
             } while (cursor.moveToNext());
         }
 
@@ -95,10 +99,23 @@ public class Database extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
-        return students;
+        return lessons;
     }
 
+    public void insertLesson(Lesson lesson) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+        values.put(SABAK, lesson.getSabak());
+        values.put(SABKI, lesson.getSabki());
+        values.put(MANZIL, lesson.getManzil());
+        values.put(S_ID, lesson.getSid());
+        values.put("date", lesson.getDate());
+
+
+        db.insert(TABLE_NAME2, null, values);
+        db.close();
+    }
 
 
 

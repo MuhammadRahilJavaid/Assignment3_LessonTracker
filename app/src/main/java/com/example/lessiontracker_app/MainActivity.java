@@ -1,6 +1,7 @@
 package com.example.lessiontracker_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    List<Student> studentsList = new ArrayList<>();
+    List<Lesson> lessonsList = new ArrayList<>();
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
@@ -24,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
         String name = intent.getStringExtra("Name");
         int id = Integer.parseInt(intent.getStringExtra("Id"));
         db = new Database(this);
-        db.
-
+        lessonsList = db.GetLessons(id);
 
 
         recyclerView = findViewById(R.id.recylerViewStudent);
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 //                true);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new myRecyclerViewAdapter(friendsList) ;
+        adapter = new StudentRecyclerViewAdapter(lessonsList) ;
         recyclerView.setAdapter(adapter);
         //adapter.notifyDataSetChanged();
 

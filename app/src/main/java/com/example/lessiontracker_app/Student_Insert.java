@@ -32,8 +32,8 @@ public class Student_Insert extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (name.getText().length()>0){
-                    name.setText("");
                     db.insertStudent(new Student(name.getText().toString()));
+                    name.setText("");
                     RefreshGrid();
                 }
             }

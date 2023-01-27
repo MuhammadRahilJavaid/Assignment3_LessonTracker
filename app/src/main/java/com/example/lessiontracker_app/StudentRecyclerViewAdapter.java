@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecyclerViewAdapter.MyVH> {
-    List<Student> studentsList;
-    public StudentRecyclerViewAdapter(List<Student> studentsList) {
-        this.studentsList = studentsList;
+    List<Lesson> lessonsList;
+    public StudentRecyclerViewAdapter(List<Lesson> lessonsList) {
+        this.lessonsList = lessonsList;
     }
 
     @NonNull
@@ -28,25 +28,29 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
 
     @Override
     public void onBindViewHolder(@NonNull StudentRecyclerViewAdapter.MyVH holder, int position) {
-        holder.data = studentsList.get(position);
-        holder.textViewStudent.setText(holder.data.getName());
-        holder.textViewId.setText(holder.data.getId());
+        holder.data = lessonsList.get(position);
+        holder.manzil.setText(holder.data.getManzil());
+        holder.sabak.setText(holder.data.getSabak());
+        holder.sabki.setText(holder.data.getSabki());
+        holder.date.setText(holder.data.getDate());
     }
 
     @Override
     public int getItemCount() {
-        return studentsList.size();
+        return lessonsList.size();
     }
 
 
     public class MyVH extends RecyclerView.ViewHolder {
-        TextView textViewStudent;
-        TextView textViewId;
-        Student data;
+        TextView manzil,sabki,sabak,date;
+        Lesson data;
         public MyVH(@NonNull View itemView) {
             super(itemView);
-            textViewStudent = itemView.findViewById(R.id.studentName);
-            textViewId = itemView.findViewById(R.id.studentId);
+            sabki = itemView.findViewById(R.id.sabki);
+            sabak = itemView.findViewById(R.id.sabak);
+            manzil = itemView.findViewById(R.id.manzil);
+            date = itemView.findViewById(R.id.date);
+
         }
     }
 }
