@@ -30,7 +30,7 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
     public void onBindViewHolder(@NonNull StudentRecyclerViewAdapter.MyVH holder, int position) {
         holder.data = studentsList.get(position);
         holder.textViewStudent.setText(holder.data.getName());
-        holder.textViewCity.setText(holder.data.getCity());
+        holder.textViewId.setText(holder.data.getId());
     }
 
     @Override
@@ -41,12 +41,12 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
 
     public class MyVH extends RecyclerView.ViewHolder {
         TextView textViewStudent;
-        TextView textViewCity;
+        TextView textViewId;
         Student data;
         public MyVH(@NonNull View itemView) {
             super(itemView);
-            textViewStudent = itemView.findViewById(R.id.textViewFriendName);
-            textViewCity = itemView.findViewById(R.id.textViewCity);
+            textViewStudent = itemView.findViewById(R.id.studentName);
+            textViewId = itemView.findViewById(R.id.studentId);
         }
     }
 }
